@@ -1,0 +1,38 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head('Kategoriler')"></head>
+
+<body>
+    <header>
+        <div th:replace="fragments/navbar :: navbar"></div>
+    </header>
+    <div class="container">
+        <main class="sayfa">
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="row mt-4">
+                <!-- SOL TARAF: Kategori ve Arama -->
+                <div class="col-md-3">
+                    <input type="text" id="searchInput" class="form-control mb-3" placeholder="Kitap veya yazar ara...">
+                    <select id="categoryFilter" class="form-control mb-3">
+                        <option value="">Tüm Kategoriler</option>
+                    </select>
+                </div>
+                <!-- SAĞ TARAF: Kitap Listesi -->
+                <div class="col-md-9">
+                    <div class="row" id="kitap_listesi"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <a href="#" class="btn btn-primary" id="backTopButton"><span class="fas fa-arrow-up"></span></a>
+    <!-- footer start -->
+    <div th:replace="fragments/footer :: footer"></div>
+    <!-- footer end -->
+    <div th:replace="fragments/sepet :: sepetModal"></div>
+    <div th:replace="fragments/scripts :: scripts"></div>
+</body>
+</html>

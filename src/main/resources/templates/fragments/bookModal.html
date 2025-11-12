@@ -1,0 +1,77 @@
+<div th:fragment="bookModalUpdate">
+    <div class="modal fade" id="kitapModal" tabindex="-1" aria-labelledby="kitapModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content border-0 shadow-lg">
+                <form id="kitapForm" method="post" action="/bookoperations/update">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title" id="kitapModalLabel">Kitap Bilgilerini Güncelle</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <!-- Kitap ID (gizli) -->
+                        <input type="hidden" id="kitapId" name="id">
+
+                        <div class="row">
+                            <!-- SOL TARAF -->
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Kitap Adı</label>
+                                    <input type="text" class="form-control" id="kitapAdi" name="title" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Yazar</label>
+                                    <input type="text" class="form-control" id="yazar" name="author" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Fiyat (₺)</label>
+                                    <input type="number" step="0.01" class="form-control" id="fiyat" name="price"
+                                        required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Stok</label>
+                                    <input type="number" class="form-control" id="stok" name="stock" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Kategori</label>
+                                    <select name="categoryId" id="kategori" class="form-control" required>
+                                        <option value="">Kategori Seçiniz</option>
+                                        <option th:each="cat : ${categories}" th:value="${cat.id}"
+                                            th:text="${cat.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- SAĞ TARAF -->
+                            <div class="col-md-6 text-center">
+                                <label class="form-label">Kapak Fotoğrafı</label>
+                                <div class="border rounded p-2 mb-3">
+                                    <img id="previewFoto" src="#" alt="Kapak Fotoğrafı"
+                                        class="img-fluid rounded shadow-sm d-none" style="max-height: 375px;">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Fotoğraf URL</label>
+                                    <input type="text" class="form-control" id="fotoUrl" name="picture"
+                                        placeholder="https://..." required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alt kısım: geniş "Kaydet" butonu -->
+                    <div class="modal-footer p-0">
+                        <button type="submit" class="btn btn-success w-100 py-3 fs-5">
+                            <i class="bi bi-save"></i> Kaydet
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

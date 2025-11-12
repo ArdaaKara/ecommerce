@@ -1,0 +1,56 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head('İletişim')"></head>
+<body>
+    <header>
+        <div th:replace="fragments/navbar :: navbar"></div>
+    </header>
+    <div class="container">
+        <main class="sayfa">
+            <br>
+            <br>
+            <br>
+            <div class="container text-center my-5">
+                <h1>Bize Ulaşın</h1>
+                <p>Her türlü soru, öneri ve destek için bize mesaj bırakabilirsiniz.</p>
+            </div>
+            <div class="container mb-5">
+                <div class="row">
+                    <div class="col-lg-6 mb-4 " style="margin-left: 325px;">
+                        <div class="card p-4">
+                            <h5 class="card-title mb-3">Mesaj Gönder</h5>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Adınız Soyadınız</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Adınızı giriniz"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">E-posta Adresiniz</label>
+                                    <input type="email" class="form-control" id="email"
+                                        placeholder="E-posta adresinizi giriniz" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Konu</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="Konu giriniz"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Mesajınız</label>
+                                    <textarea class="form-control" id="message" rows="4"
+                                        placeholder="Mesajınızı yazınız" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Gönder</button>
+                            </form>
+                        </div>
+                    </div>
+        </main>
+    </div>
+    <a href="#" class="btn btn-primary" id="backTopButton"><span class="fas fa-arrow-up"></span></a>
+    <!-- footer start -->
+    <div th:replace="fragments/footer :: footer"></div>
+    <!-- footer end -->
+    <div th:replace="fragments/scripts :: scripts"></div>
+    <div th:replace="fragments/sepet :: sepetModal"></div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head('Kayıt ol')"></head>
+<body>
+    <header>
+        <div th:replace="fragments/navbar :: navbar"></div>
+    </header>
+    <div class="container">
+        <main class="sayfa">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="container mt-5">
+                <h3 class="text-center mt-5">KAYIT OL</h3>
+                <form action="/register" method="post" class="mt-4">
+                    <div class="mb-3">
+                        <input type="text" name="name" class="form-control form-control-md"
+                            placeholder="Kullanıcı Adınızı Giriniz" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" name="email" class="form-control form-control-md"
+                            placeholder="E posta adresinizi giriniz" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" name="password" class="form-control form-control-md"
+                            placeholder="Şifrenizi Giriniz" required>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="terms" required>
+                        <label class="form-check-label" for="terms">
+                            Sözleşmeyi Okudum, Kabul ediyorum.
+                        </label>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary w-50">KAYIT OL</button>
+                    </div>
+                </form>
+                <p th:text="${error}"></p>
+                <a th:href="@{/login}"> Hesabınız var mı? Giriş Yap</a>
+            </div>
+        </main>
+    </div>
+    <a href="#" class="btn btn-primary" id="backTopButton"><span class="fas fa-arrow-up"></span></a>
+    <!-- footer start -->
+    <div th:replace="fragments/footer :: footer"></div>
+    <!-- footer end -->
+    <div th:replace="fragments/scripts :: scripts"></div>
+    <div th:replace="fragments/sepet :: sepetModal"></div>
+</body>
+</html>

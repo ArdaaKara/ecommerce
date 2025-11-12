@@ -1,0 +1,50 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head('Giriş Yap')"></head>
+
+<body>
+    <header>
+        <div th:replace="fragments/navbar :: navbar"></div>
+    </header>
+    <div class="container">
+        <main class="sayfa">
+            <div class="container">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <form th:action="@{/login}" method="post" class="col-6" style="margin-left: 275px; margin-top: 150px;">
+                    <div class="col-12">
+                        <h1 style="margin-left: 175px;">Giriş yap</h1>
+                        <div class="w-100 popover-wrapper position-relative mb-1"><input type="text" placeholder=""
+                                name="name"
+                                class="form-control form-control-md loaded form-control-placeholder form-control-placeholder-hidden"><span
+                                class="input-placeholder">Kullanıcı Adınızı Giriniz<span
+                                    class="input-placeholder-required fw-bold text-danger">*</span></span></div>
+                    </div>
+                    <div class="col-12">
+                        <div class="w-100 popover-wrapper position-relative mb-1"><input type="password" placeholder=""
+                                name="password"
+                                class="form-control form-control-md loaded form-control-placeholder form-control-placeholder-hidden"><span
+                                class="input-placeholder">Şifrenizi giriniz<span
+                                    class="input-placeholder-required fw-bold text-danger">*</span></span></div>
+                    </div>
+                    <div class="form-group mt-3 ml-3 ">
+                        <label for=""><input type="checkbox" class="form-checkbox">Beni hatırla</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="margin-left: 125px; width: 50%;">Giriş
+                        yap</button>
+                </form>
+                <a style="margin-left: 310px;" th:href="@{/register}">Kayıt Ol</a>
+            </div>
+        </main>
+    </div>
+    <a href="#" class="btn btn-primary" id="backTopButton"><span class="fas fa-arrow-up"></span></a>
+    <!-- footer start -->
+    <div th:replace="fragments/footer :: footer"></div>
+    <!-- footer end -->
+    <div th:replace="fragments/scripts :: scripts"></div>
+</body>
+</html>

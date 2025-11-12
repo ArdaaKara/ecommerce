@@ -1,0 +1,50 @@
+<div th:fragment="sepetModal">
+    <div class="modal fade" id="sepetim" tabindex="-1" role="dialog" style="backdrop-filter: blur(10px);">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Kapat"></button><!-- kapatma butonu -->
+                </div>
+                <div class="modal-body"></div>
+                <div class="container">
+                    <h3 style="text-align: center; margin-top: 0; ">SEPETİM</h3>
+                    <form action="">
+                        <div class="card mb-3 mt-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img style="width: 100%; height: 250px; object-fit: contain; " id="kitapFoto2"
+                                        class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="kitapAdi2"></h5>
+                                        <p id="kitapHakkinda2" class="card-text ellipsed"></p>
+                                    </div>
+                                    <label for="" class="ml-4" id="kitapFiyat"></label>
+                                </div>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="https://placehold.co/600x700" class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">SEFİLER</h5>
+                                        <p class="card-text">This is a wider card with supporting text below as a
+                                            natural lead-in to additional content. This content is a little bit longer.
+                                            <i class="fa-bold fa-lg ">250 TL</i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer"><button class="btn btn-primary" style="width: 100%;"
+                        data-dismiss="modal">SATIN
+                        AL</button></div>
+            </div>
+        </div>
+    </div>
+</div>
