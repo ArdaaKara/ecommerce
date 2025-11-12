@@ -20,7 +20,7 @@ public class BookController {
     @GetMapping("/books")
     public String listBooks(Model model) {
         model.addAttribute("books", bookService.findAll());
-        return "books-list"; // Thymeleaf veya JSP sayfan
+        return "books-list"; 
     }
 
     // Tek kitap detay sayfası

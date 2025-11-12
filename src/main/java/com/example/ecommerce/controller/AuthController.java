@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AuthController {
-    /*  */
     @Autowired
     private UserRepository userRepository;
 
@@ -26,13 +25,13 @@ public class AuthController {
 
         if (user == null || !user.getPassword().equals(password)) {
             model.addAttribute("error", "Kullanıcı adı veya şifre hatalı!");
-            return "login"; // login sayfasına geri dön
+            return "login"; 
         }
 
         // Başarılı giriş
-        session.setAttribute("name", name); // sessiona kaydet
+        session.setAttribute("name", name); 
         session.setAttribute("role", user.getRole());
-        return "redirect:/"; // ana sayfaya yönlendir
+        return "redirect:/"; 
     }
 
     @ModelAttribute
@@ -46,18 +45,18 @@ public class AuthController {
     public String home(HttpSession session, Model model) {
         String name = (String) session.getAttribute("name");
         if (name != null) {
-            model.addAttribute("name", name); // ana sayfada gösterebilirsin
+            model.addAttribute("name", name); 
         }
-        return "index"; // index.html
+        return "index"; 
     }
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.invalidate(); // oturumu temizle
-        return "redirect:/"; // ana sayfaya yönlendir
+        session.invalidate(); 
+        return "redirect:/";
     }
 
-    /*  */
+    
     private final UserService userService;
 
     public AuthController(UserService userService) {

@@ -8,20 +8,6 @@ import org.springframework.ui.Model;
 
 @Controller
 public class HomeController {
-
-    /* @GetMapping("/")
-    public String index(Model model) {
-
-        return "index"; // index.html
-    }
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-    @GetMapping("/register")
-    public String register() {
-        return "register";
-    } */
     
     @GetMapping("/communication")
     public String communication() {

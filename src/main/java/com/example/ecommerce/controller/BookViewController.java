@@ -27,18 +27,16 @@ public class BookViewController {
         return "books";
     }
 
-    // Tek kitap detay sayfası
     @GetMapping("/{id}")
     public String bookDetail(@PathVariable Long id, Model model) {
         Book book = bookService.findById(id);
         if (book == null) {
-            return "redirect:/books"; // Kitap bulunamazsa listeye yönlendir
+            return "redirect:/books"; 
         }
         model.addAttribute("book", book);
-        return "books"; // book-detail.html
+        return "books"; 
     }
 
-    // 📄 Sayfayı açar ve tüm kitapları gönderir
     @GetMapping
     public String listBooks(Model model) {
         List<Book> books = bookService.getAllBooks();
@@ -58,29 +56,22 @@ public class BookViewController {
         return "/bookoperations";
     }
 
-    // ➕ Kitap ekleme formundan gelen isteği işler
     @PostMapping("/add")
     public String addBook(@ModelAttribute Book book) {
-        // picture alanı formdan URL olarak geliyor
-        // zaten book.setPicture() ModelAttribute ile set edilmiş olacak
         bookService.saveBook(book);
         return "redirect:/bookoperations";
     }
 
-    // ✏️ Güncelleme
     @PostMapping("/update")
     public String updateBook(@ModelAttribute Book book) {
         bookService.updateBook(book.getId(), book);
         return "redirect:/bookoperations";
     }
 
-    // ❌ Silme
     @PostMapping("/delete")
     public String deleteBook(@RequestParam Long id) {
         bookService.deleteBook(id);
         return "redirect:/bookoperations";
     }
-    /*  */
 
-    /*  */
 }
