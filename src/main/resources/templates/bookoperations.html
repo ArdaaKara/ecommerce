@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/head :: head('CRUD - ADMİN')"></head>
+<head th:replace="~{fragments/head :: head('CRUD - ADMİN')}"></head>
 
 <body>
     <header>
@@ -164,12 +164,10 @@
             </div>
         </div>
     </div>
-    <!-- footer start -->
-    <div th:replace="fragments/footer :: footer"></div>
-    <!-- footer end -->
-    <div th:replace="fragments/scripts :: scripts"></div>
-    <div th:replace="fragments/sepet :: sepetModal"></div>
-    <div th:replace="fragments/bookModal :: bookModalUpdate"></div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+    <div th:replace="~{fragments/sepet :: sepetModal}"></div>
+    <div th:replace="~{fragments/scripts :: scripts}"></div>
+    <div th:replace="~{fragments/bookModal :: bookModalUpdate}"></div>
 </body>
 
 </html>

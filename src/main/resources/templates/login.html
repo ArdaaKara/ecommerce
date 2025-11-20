@@ -1,11 +1,11 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/head :: head('Giriş Yap')"></head>
+<head th:replace="~{fragments/head :: head('Giriş Yap')}"></head>
 
 <body>
     <header>
-        <div th:replace="fragments/navbar :: navbar"></div>
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
     </header>
     <div class="container">
         <main class="sayfa">
@@ -42,9 +42,8 @@
         </main>
     </div>
     <a href="#" class="btn btn-primary" id="backTopButton"><span class="fas fa-arrow-up"></span></a>
-    <!-- footer start -->
-    <div th:replace="fragments/footer :: footer"></div>
-    <!-- footer end -->
-    <div th:replace="fragments/scripts :: scripts"></div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+    <div th:replace="~{fragments/sepet :: sepetModal}"></div>
+    <div th:replace="~{fragments/scripts :: scripts}"></div>
 </body>
 </html>

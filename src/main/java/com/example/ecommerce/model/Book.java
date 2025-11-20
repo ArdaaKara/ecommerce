@@ -3,6 +3,10 @@ package com.example.ecommerce.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @NoArgsConstructor
@@ -39,6 +43,18 @@ public class Book {
 
     @Column(length = 1000)
     private String picture;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Review> reviews = new ArrayList<>();
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     @PrePersist
     protected void onCreate() {

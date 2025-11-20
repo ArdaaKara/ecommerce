@@ -2,24 +2,25 @@ package com.example.ecommerce.controller;
 
 import com.example.ecommerce.model.Book;
 import com.example.ecommerce.service.*;
-
-import jakarta.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+
 @Controller
-@RequestMapping("/bookoperations")
-@PreAuthorize("hasRole('ADMIN')")
-public class BookViewController {
-    @Autowired
-    private final BookService bookService = null;
-    @Autowired
-    private final CategoryService categoryService = null;
+@RequestMapping("/bookoperations")                  
+@PreAuthorize("hasRole('ADMIN')")            
+public class AdminBookController {
+
+    private final BookService bookService;
+    private final CategoryService categoryService;
+
+    public AdminBookController(BookService bookService, CategoryService categoryService) {
+        this.bookService = bookService;
+        this.categoryService = categoryService;
+    }
 
     @GetMapping("/books")
     public String books() {
@@ -28,13 +29,13 @@ public class BookViewController {
     }
 
     @GetMapping("/{id}")
-    public String bookDetail(@PathVariable Long id, Model model) {
+    public String bookDetail(@PathVariable Integer id, Model model) {
         Book book = bookService.findById(id);
         if (book == null) {
-            return "redirect:/books"; 
+            return "redirect:/books";
         }
         model.addAttribute("book", book);
-        return "books"; 
+        return "books";
     }
 
     @GetMapping
@@ -48,13 +49,7 @@ public class BookViewController {
         return "/bookoperations";
     }
 
-    @GetMapping("/bookoperations")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String bookOperations(HttpSession session, Model model) {
-        model.addAttribute("bookoperations", bookService.getAllBooks());
 
-        return "/bookoperations";
-    }
 
     @PostMapping("/add")
     public String addBook(@ModelAttribute Book book) {
@@ -73,5 +68,4 @@ public class BookViewController {
         bookService.deleteBook(id);
         return "redirect:/bookoperations";
     }
-
 }

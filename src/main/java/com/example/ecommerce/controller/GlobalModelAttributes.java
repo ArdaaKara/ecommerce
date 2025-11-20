@@ -3,14 +3,16 @@ package com.example.ecommerce.controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.ui.Model;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.servlet.http.HttpSession;
 @ControllerAdvice
 public class GlobalModelAttributes {
-
     @ModelAttribute
-    public void addAttributes(Model model, HttpSession session) {
-        model.addAttribute("name", session.getAttribute("name"));
-        model.addAttribute("role", session.getAttribute("role"));
+    public void addUserAttributes(Model model, @AuthenticationPrincipal UserDetails user) {
+        if (user != null) {
+            model.addAttribute("name", user.getUsername());
+            model.addAttribute("role", user.getAuthorities().iterator().next().getAuthority());
+        }
     }
 }

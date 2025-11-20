@@ -19,9 +19,9 @@ public class BookService {
         this.repository = repository;
     }
 
-    public Book findById(Long id) {
-        Optional<Book> optionalBook = repository.findById(id);
-        return optionalBook.orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
+    public Book findById(Integer bookId) {
+        Optional<Book> optionalBook = repository.findById(bookId);
+        return optionalBook.orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
     }
 
     public List<Book> getAllBooks() {

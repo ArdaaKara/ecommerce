@@ -1,153 +1,86 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="tr">
 
-<head>
-    <title>E-ticaret</title>
-    <link rel="icon" href="content/picture/57589.png" type="image/png">
-    <!-- cdn son -->
-    <!-- Required meta tags -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS (tek bir sürüm yeterli, CDN ile çağrıldı) -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<head th:replace="~{fragments/head :: head('Profilim - ' + ${user.name})}"></head>
 
-    <!-- Font Awesome (ikonlar için) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+<body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <div class="container my-5">
+        <div class="row g-5">
+            
 
-    <!-- Kendi CSS dosyan (Spring Boot ile kullanıyorsan thymeleaf için "th:href" kullanılabilir) -->
-
-    <link rel="stylesheet" th:href="@{/css/main.css}">
-
-    <!-- jQuery CDN (node_modules'ten değil) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-</head>
-
-<body class="">
-
-    <header>
-        <div th:replace="fragments/navbar :: navbar"></div>
-    </header>
-    <div class="container">
-        <main class="sayfa">
-            <div class="container my-5">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <img th:src="@{${user.profilePicture}}" class="card-img-top" alt="Profil Fotoğrafı">
-                            <div class="card-body text-center">
-                                <h4 class="card-title" th:text="${user.name}">Kullanıcı Adı</h4>
-                                <p class="card-text" th:text="${user.email}">email@example.com</p>
-                                <p class="card-text" th:text="'Üyelik Tarihi: ' + ${user.joinDate}">Üyelik Tarihi:
-                                    01/01/2023</p>
-                                <a href="#" class="btn btn-primary">Profili Düzenle</a>
-                            </div>
+            <!-- Profil Kartı -->
+            <div class="col-lg-4">
+            <br>
+            <br>
+            <br>
+            <br>
+                <div class="card shadow border-0 text-center">
+                    <img src="data:image/png;base64,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" class="card-img-top"
+                        alt="Profil" style="height:350px; object-fit:cover;">
+                    <div class="card-body">
+                        <h3 class="fw-bold" th:text="${user.name}">Ahmet</h3>
+                        <p class="text-muted" th:text="${user.email}">ahmet@example.com</p>
+                        <hr>
+                        <p class="text-secondary">
+                            <i class="fas fa-calendar-alt me-2"></i>
+                            Üye olduğu tarih:
+                            <!-- BURAYI SENİN USER SINIFINA GÖRE DEĞİŞTİR -->
+                            <strong th:text="${#temporals.format(user.createdAt, 'dd MMMM yyyy', T(java.util.Locale).forLanguageTag('tr-TR'))}">01 Ocak 2025
+                                
+                            </strong>
+                        </p>
+                        <div class="alert alert-info">
+                            <strong th:text="${#lists.size(userReviews)}">0</strong> yorum yaptı
                         </div>
-                    </div>
-
-                    <div class="col-md-8">
-                        <div class="card mb-4">
-                            <div class="card-header bg-dark text-white">
-                                Yapılan Yorumlar
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item" th:each="yorum : ${user.comments}">
-                                    <strong th:text="${yorum.bookName}">Kitap Adı</strong>:
-                                    <span th:text="${yorum.text}">Bu kitap çok güzel!</span>
-                                    <br>
-                                    <small class="text-muted" th:text="${yorum.date}">01/01/2025</small>
-                                </li>
-                                <li class="list-group-item" th:if="${#lists.isEmpty(user.comments)}">Henüz yorum
-                                    yapılmamış.</li>
-                            </ul>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header bg-dark text-white">
-                                Satın Alınan Kitaplar
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-striped mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Kitap</th>
-                                            <th>Yazar</th>
-                                            <th>Adet</th>
-                                            <th>Fiyat</th>
-                                            <th>Toplam</th>
-                                            <th>Sipariş Tarihi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr th:each="kitap : ${user.purchasedBooks}">
-                                            <td th:text="${kitap.name}">Örnek Kitap</td>
-                                            <td th:text="${kitap.author}">Yazar Adı</td>
-                                            <td th:text="${kitap.quantity}">1</td>
-                                            <td th:text="${kitap.price}">50 TL</td>
-                                            <td th:text="${kitap.total}">50 TL</td>
-                                            <td th:text="${kitap.orderDate}">01/01/2025</td>
-                                        </tr>
-                                        <tr th:if="${#lists.isEmpty(user.purchasedBooks)}">
-                                            <td colspan="6" class="text-center">Henüz kitap satın alınmamış.</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
-        </main>
+
+            <!-- Yorumlar -->
+            <div class="col-lg-8">
+                <h2 class="mb-4">Yorumlarım</h2>
+
+                <div th:each="r : ${userReviews}" class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h5>
+                                    <a th:href="@{/books/{id}(id=${r.book.id})}" th:text="${r.book.title}"
+                                        class="text-decoration-none">
+                                        Kitap Adı
+                                    </a>
+                                </h5>
+                                <small class="text-muted" 
+                                      th:text="${#temporals.format(r.createdAt, 'dd.MM.yyyy HH:mm')}">
+                                    15.11.2024 14:30
+                                </small>
+                            </div>
+                            <div class="text-warning fs-4">
+                                <span th:switch="${r.rating}">
+                                    <span th:case="5">★★★★★</span>
+                                    <span th:case="4">★★★★☆</span>
+                                    <span th:case="3">★★★☆☆</span>
+                                    <span th:case="2">★★☆☆☆</span>
+                                    <span th:case="1">★☆☆☆☆</span>
+                                </span>
+                            </div>
+                        </div>
+                        <p class="mt-3" th:text="${r.comment}">Harika bir kitap!</p>
+                    </div>
+                </div>
+
+                <div th:if="${#lists.isEmpty(userReviews)}" class="text-center py-5 bg-light rounded">
+                    <h4 class="text-muted">Henüz yorum yapmadın</h4>
+                    <p>Bir kitaba yorum yazarak başla!</p>
+                    <a href="/" class="btn btn-primary">Kitaplara Git</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <a href="#" class="btn btn-primary" id="backTopButton"><span class="fas fa-arrow-up"></span></a>
-    <!-- footer start -->
-    <div th:replace="fragments/footer :: footer"></div>
-    <!-- footer end -->
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <!-- jQuery ve Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!--  -->
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- jQuery UI CSS -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-
-    <!-- jQuery UI JS -->
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-
-    <!-- Popper.js (Bootstrap 5 için dahil edildi zaten bundle'da, ama ayrı kullanmak istersen) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <!-- Bootstrap JS Bundle (Popper dahil) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- JS dosyaları -->
-    <!-- <script src="../static/js/main.js" defer></script>
-    <script src="../static/js/data.js"></script> -->
-    <script th:href="@{/js/main.css}"></script>
-    <script th:href="@{/js/data.css}"></script>
-    <div th:replace="fragments/sepet :: sepetModal"></div>
-
+    <div th:replace="~{fragments/footer :: footer}"></div>
+    <div th:replace="~{fragments/sepet :: sepetModal}"></div>
+    <div th:replace="~{fragments/scripts :: scripts}"></div>
 </body>
-
 </html>

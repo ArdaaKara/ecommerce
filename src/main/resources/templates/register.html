@@ -1,9 +1,9 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: head('Kayıt ol')"></head>
+<head th:replace="~{fragments/head :: head('Kayıt ol')}"></head>
 <body>
     <header>
-        <div th:replace="fragments/navbar :: navbar"></div>
+        <div th:replace="~{fragments/navbar :: navbar}"></div>
     </header>
     <div class="container">
         <main class="sayfa">
@@ -41,6 +41,8 @@
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary w-50">KAYIT OL</button>
                     </div>
+                    <p th:if="${param.register}" class="alert alert-success">Kayıt başarılı! Giriş yapabilirsiniz.</p>
+
                 </form>
                 <p th:text="${error}"></p>
                 <a th:href="@{/login}"> Hesabınız var mı? Giriş Yap</a>
@@ -48,10 +50,8 @@
         </main>
     </div>
     <a href="#" class="btn btn-primary" id="backTopButton"><span class="fas fa-arrow-up"></span></a>
-    <!-- footer start -->
-    <div th:replace="fragments/footer :: footer"></div>
-    <!-- footer end -->
-    <div th:replace="fragments/scripts :: scripts"></div>
-    <div th:replace="fragments/sepet :: sepetModal"></div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+    <div th:replace="~{fragments/sepet :: sepetModal}"></div>
+    <div th:replace="~{fragments/scripts :: scripts}"></div>
 </body>
 </html>

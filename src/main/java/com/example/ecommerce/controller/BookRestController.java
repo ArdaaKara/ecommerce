@@ -24,13 +24,15 @@ public class BookRestController {
     public List<Book> getBooks() {
         return bookRepository.findAll();
     }
-    @GetMapping("/api/categorys")
+
+    @GetMapping("/api/category")
     public List<com.example.ecommerce.model.Category> getCategorys() {
         return categoryRepository.findAll();
     }
+
     @GetMapping("/api/users")
     public List<com.example.ecommerce.model.User> getallUsers() {
         return userRepository.findAll();
     }
-    
+
 }

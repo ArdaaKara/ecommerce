@@ -1,14 +1,44 @@
 $(function () {
-  var autoComplete = [
-    "Roman",
-    "CSS",
-    "JavaScript",
-    "jQuery",
-    "Kişisel Gelişim",
-  ];
-  $("#tags").autocomplete({
-    source: autoComplete,
-  });
+    $("#tags").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "/api/books",  
+                dataType: "json",
+                data: {
+                    q: request.term  
+                },
+                success: function (data) {
+                    response(data); 
+                }
+            });
+        },
+        minLength: 2,        
+        delay: 300,
+        select: function (event, ui) {
+            window.location.href = `/books/${ui.item.id}`; 
+            return false;
+        }
+    })
+    .autocomplete("instance")._renderItem = function (ul, item) {
+        return $("<li>")
+            .append("<div><strong>" + (item.title || "") + "</strong></div>")
+            .appendTo(ul);
+    };
+
+    $("#search_button").on("click", performSearch);
+    $("#tags").on("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            performSearch();
+        }
+    });
+    
+    function performSearch() {
+        const query = $("#tags").val().trim();
+        if (query.length === 0) return;
+
+        window.location.href = `/search?q=${encodeURIComponent(query)}`;
+    }
 });
 $(function () {
   $(window).scroll(function () {
@@ -58,7 +88,7 @@ $(document).ready(function () {
   }
 
   let categories = [];
-  $.getJSON("/api/categorys", function (data) {
+  $.getJSON("/api/category", function (data) {
     categories = data;
     categories.forEach((cat) => {
       $("#categoryFilter").append(
