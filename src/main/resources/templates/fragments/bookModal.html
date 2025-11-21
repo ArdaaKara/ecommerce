@@ -1,7 +1,9 @@
 <div th:fragment="bookModalUpdate">
+
     <div class="modal fade" id="kitapModal" tabindex="-1" aria-labelledby="kitapModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content border-0 shadow-lg">
+
                 <form id="kitapForm" method="post" action="/bookoperations/update">
                     <div class="modal-header bg-primary text-white">
                         <h5 class="modal-title" id="kitapModalLabel">Kitap Bilgilerini Güncelle</h5>
@@ -9,66 +11,66 @@
                     </div>
 
                     <div class="modal-body">
-
                         <input type="hidden" id="kitapId" name="id">
 
                         <div class="row">
-                            <!-- LEFT SİDE -->
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label">Kitap Adı</label>
                                     <input type="text" class="form-control" id="kitapAdi" name="title" required>
                                 </div>
-
                                 <div class="mb-3">
                                     <label class="form-label">Yazar</label>
                                     <input type="text" class="form-control" id="yazar" name="author" required>
                                 </div>
-
                                 <div class="mb-3">
                                     <label class="form-label">Fiyat (₺)</label>
-                                    <input type="number" step="0.01" class="form-control" id="fiyat" name="price"
-                                        required>
+                                    <input type="number" step="0.01" class="form-control" id="fiyat" name="price" required>
                                 </div>
-
                                 <div class="mb-3">
                                     <label class="form-label">Stok</label>
                                     <input type="number" class="form-control" id="stok" name="stock" required>
                                 </div>
-
                                 <div class="mb-3">
                                     <label class="form-label">Kategori</label>
                                     <select name="categoryId" id="kategori" class="form-control" required>
                                         <option value="">Kategori Seçiniz</option>
-                                        <option th:each="cat : ${categories}" th:value="${cat.id}"
-                                            th:text="${cat.name}">
-                                        </option>
+                                        <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
                                     </select>
                                 </div>
                             </div>
 
-                            <!-- RİGHT SİDE -->
                             <div class="col-md-6 text-center">
                                 <label class="form-label">Kapak Fotoğrafı</label>
                                 <div class="border rounded p-2 mb-3">
-                                    <img id="previewFoto" src="#" alt="Kapak Fotoğrafı"
-                                        class="img-fluid rounded shadow-sm d-none" style="max-height: 375px;">
+                                    <img id="previewFoto" src="#" alt="Kapak Fotoğrafı" class="img-fluid rounded shadow-sm d-none" style="max-height: 375px;">
                                 </div>
-
                                 <div class="mb-3">
                                     <label class="form-label">Fotoğraf URL</label>
-                                    <input type="text" class="form-control" id="fotoUrl" name="picture"
-                                        placeholder="https://..." required>
+                                    <input type="text" class="form-control" id="fotoUrl" name="picture" placeholder="https://..." required>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer p-0">
-                        <button type="submit" class="btn btn-success w-100 py-3 fs-5">
-                            <i class="bi bi-save"></i> Kaydet
+
+                    <div class="modal-footer p-3 border-top">
+                        <button type="submit" class="btn btn-success btn-lg w-100 py-3 fs-5">
+                            Kaydet
                         </button>
                     </div>
                 </form>
+
+                <div class="border-top">
+                    <form id="deleteForm" method="post" action="/bookoperations/delete" style="margin:0;">
+                        <input type="hidden" name="id" id="silIdInput" value="">
+
+                        <button type="submit" class="btn btn-danger btn-lg w-100 py-3 fs-5 border-0"
+                                onclick="return confirm('DİKKAT!\n\n' + document.getElementById('kitapAdi').value + ' kitabı KALICI OLARAK silinecek!\n\nEmin misiniz?')">
+                            Kitabı Kalıcı Olarak Sil
+                        </button>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>

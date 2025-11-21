@@ -1,46 +1,4 @@
 $(function () {
-    $("#tags").autocomplete({
-        source: function (request, response) {
-            $.ajax({
-                url: "/api/books",  
-                dataType: "json",
-                data: {
-                    q: request.term  
-                },
-                success: function (data) {
-                    response(data); 
-                }
-            });
-        },
-        minLength: 2,        
-        delay: 300,
-        select: function (event, ui) {
-            window.location.href = `/books/${ui.item.id}`; 
-            return false;
-        }
-    })
-    .autocomplete("instance")._renderItem = function (ul, item) {
-        return $("<li>")
-            .append("<div><strong>" + (item.title || "") + "</strong></div>")
-            .appendTo(ul);
-    };
-
-    $("#search_button").on("click", performSearch);
-    $("#tags").on("keydown", function (e) {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            performSearch();
-        }
-    });
-    
-    function performSearch() {
-        const query = $("#tags").val().trim();
-        if (query.length === 0) return;
-
-        window.location.href = `/search?q=${encodeURIComponent(query)}`;
-    }
-});
-$(function () {
   $(window).scroll(function () {
     if ($(window).scrollTop() > 70) {
       $("#backTopButton").fadeIn();
@@ -84,7 +42,7 @@ $(document).ready(function () {
             </div>
         `;
     });
-    $("#kitap_listesi").html(kitap_card);
+    $("#kitap_listesi2").html(kitap_card);
   }
 
   let categories = [];
@@ -128,14 +86,14 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("fiyat").value = btn.dataset.fiyat || "";
     document.getElementById("stok").value = btn.dataset.stok || "";
     document.getElementById("fotoUrl").value = btn.dataset.foto || "";
-
-    // kategori seçimi
+    document.getElementById("silIdInput").value = btn.dataset.id || "";
+    
     const kategoriSelect = document.getElementById("kategori");
     Array.from(kategoriSelect.options).forEach(
       (opt) => (opt.selected = opt.value === btn.dataset.kategori)
     );
 
-    // db’den gelen foto URL’sini göster
+    
     if (btn.dataset.foto) {
       previewFoto.src = btn.dataset.foto;
       previewFoto.classList.remove("d-none");
@@ -144,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // URL değişince önizleme güncelle
+  
   fotoUrl.addEventListener("input", function () {
     const url = this.value.trim();
     if (url) {
@@ -157,30 +115,108 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 /* Book Operations Finish */
 /* Ana Safa Start */
-$(document).ready(function () {
-  $.getJSON("/api/books", function (kitaplar) {
-    let kitap_card = "";
-    $.each(kitaplar, function (i, book) {
-      kitap_card += `
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex">
-                <div class="card h-100 w-100">
-                    <a class="img-container">
-                        <img src="${book.picture}" class="card-img-top img-fluid" alt="${book.title}">
-                    </a>
-                    <div class="card-body text-center">
-                        <h6 class="card-title"><a href="/books/${book.id}">${book.title}</a></h6>
-                        <p class="card-text">${book.author}</p>
-                        <p  class="card-text">${book.price} ₺</p>
 
-                        <a href="#" class="btn btn-primary w-100 mt-2">
-                            <span class="fas fa-shopping-basket"></span> Sepet
+$(document).ready(function () {
+  const kitapSayisiPerSayfa = 12; 
+
+  function loadBooks(page = 0) {
+    $.getJSON(
+      "/api/booksPAGE",
+      {
+        page: page,
+        size: kitapSayisiPerSayfa,
+      },
+      function (data) {
+        let html = "";
+        $.each(data.books, function (i, book) {
+          html += `
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex">
+                    <div class="card h-100 w-100 shadow-sm">
+                        <a href="/books/${
+                          book.id
+                        }" class="text-decoration-none">
+                            <img src="${book.picture || "/img/no-image.jpg"}" 
+                                 class="card-img-top" style="height: 450px; object-fit: cover;" 
+                                 alt="${book.title}">
                         </a>
+                        <div class="card-body text-center d-flex flex-column">
+                            <h6 class="card-title">
+                                <a href="/books/${book.id}" class="text-dark">
+                                    ${
+                                      book.title.length > 35
+                                        ? book.title.substring(0, 35) + "..."
+                                        : book.title
+                                    }
+                                </a>
+                            </h6>
+                            <p class="text-muted small">${book.author}</p>
+                            <p class="fw-bold text-primary mt-auto">${
+                              book.price
+                            } ₺</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm mt-2">Sepete Ekle</a>
+                        </div>
                     </div>
-                </div>
-            </div>
-            `;
-    });
-    $("#kitap_listesi").html(kitap_card);
-  });
+                </div>`;
+        });
+
+        $("#kitap_listesi").html(html);
+
+        buildPagination(data.currentPage, data.totalPages);
+      }
+    );
+  }
+
+  function buildPagination(currentPage, totalPages) {
+    if (totalPages <= 1) {
+      $("#pagination").remove();
+      return;
+    }
+
+    let pagination = `<nav><ul class="pagination justify-content-center">`;
+
+    pagination += `<li class="page-item ${currentPage == 0 ? "disabled" : ""}">
+            <a class="page-link" href="#" data-page="${
+              currentPage - 1
+            }">Önceki</a></li>`;
+
+    for (let i = 0; i < totalPages; i++) {
+      pagination += `<li class="page-item ${i == currentPage ? "active" : ""}">
+                <a class="page-link" href="#" data-page="${i}">${
+        i + 1
+      }</a></li>`;
+    }
+
+    pagination += `<li class="page-item ${
+      currentPage >= totalPages - 1 ? "disabled" : ""
+    }">
+            <a class="page-link" href="#" data-page="${
+              currentPage + 1
+            }">Sonraki</a></li>
+            </ul></nav>`;
+
+    if ($("#pagination").length) {
+      $("#pagination").html(pagination);
+    } else {
+      $("#kitap_listesi").after(
+        '<div id="pagination" class="my-5">' + pagination + "</div>"
+      );
+    }
+
+    $(".page-link")
+      .off("click")
+      .on("click", function (e) {
+        e.preventDefault();
+        let yeniSayfa = $(this).data("page");
+        if (yeniSayfa != null && !$(this).parent().hasClass("disabled")) {
+          loadBooks(yeniSayfa);
+          $("html, body").animate(
+            { scrollTop: $("#kitap_listesi").offset().top - 100 },
+            400
+          );
+        }
+      });
+  }
+
+  loadBooks(0);
 });
 /* Ana Sayfa Finish */

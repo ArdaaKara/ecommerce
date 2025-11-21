@@ -26,7 +26,6 @@
                         <p class="text-secondary">
                             <i class="fas fa-calendar-alt me-2"></i>
                             Üye olduğu tarih:
-                            <!-- BURAYI SENİN USER SINIFINA GÖRE DEĞİŞTİR -->
                             <strong th:text="${#temporals.format(user.createdAt, 'dd MMMM yyyy', T(java.util.Locale).forLanguageTag('tr-TR'))}">01 Ocak 2025
                                 
                             </strong>

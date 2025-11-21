@@ -2,25 +2,28 @@ package com.example.ecommerce.controller;
 
 import com.example.ecommerce.model.Book;
 import com.example.ecommerce.service.*;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-
 @Controller
-@RequestMapping("/bookoperations")                  
-@PreAuthorize("hasRole('ADMIN')")            
+@RequestMapping("/bookoperations")
+@PreAuthorize("hasRole('ADMIN')")
 public class AdminBookController {
 
     private final BookService bookService;
     private final CategoryService categoryService;
 
-    public AdminBookController(BookService bookService, CategoryService categoryService) {
+    public AdminBookController(BookService bookService, CategoryService categoryService
+           ) {
         this.bookService = bookService;
         this.categoryService = categoryService;
     }
+
+
 
     @GetMapping("/books")
     public String books() {
@@ -48,8 +51,6 @@ public class AdminBookController {
 
         return "/bookoperations";
     }
-
-
 
     @PostMapping("/add")
     public String addBook(@ModelAttribute Book book) {

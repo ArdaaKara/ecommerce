@@ -34,7 +34,6 @@ public class RegisterController {
             model.addAttribute("error", "Kullanıcı adı zaten mevcut!");
             return "register";
         }
-        // Kullanıcı adı zaten var mı?
         if (userService.existsByName(user.getName())) {
             model.addAttribute("error", "Bu kullanıcı adı zaten alınmış!");
             return "register";
